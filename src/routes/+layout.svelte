@@ -2,6 +2,11 @@
 	import '$src/tailwind.css'
 
 	let darkTheme = false
+
+	/** @type {import('./$types').PageData} */
+	export let data
+
+	$: ({ count } = data)
 </script>
 
 <svelte:head>
@@ -26,9 +31,13 @@
 				</svg>
 			</span>
 		</a>
-		<a href="/" class="sm:text-2xl md:text-2xl lg:text-3xl xl:text-3xl font-bold"
-			>My All Time Series</a
-		>
+		<div class="indicator">
+			<span class="indicator-item badge badge-secondary font-bold">{count}</span>
+			<a href="/" class="sm:text-2xl md:text-2xl lg:text-3xl xl:text-3xl font-bold pr-5">
+				My All Time Series
+			</a>
+		</div>
+
 		<label class="swap swap-rotate p-2 m-3 justify-center items-center ">
 			<!-- this hidden checkbox controls the state -->
 			<input on:click={() => (darkTheme = !darkTheme)} type="checkbox" />

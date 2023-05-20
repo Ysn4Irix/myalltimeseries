@@ -6,21 +6,24 @@ import { series } from '$db/series'
  * @type {import('@sveltejs/kit').RequestHandler}
  */
 
-//? SEED COMPLETED
 export const GET = async () => {
 	try {
-		/* const response = await series.insertMany([])
+		const data = await series
+			.find(
+				{},
+				{
+					projection: {
+						_id: 0
+					}
+				}
+			)
+			.sort({ _id: -1 })
+			.toArray()
 
 		return json({
 			status: 200,
 			error: false,
-			response
-		}) */
-
-		return json({
-			status: 200,
-			error: false,
-			response: 'Nothing here'
+			data
 		})
 	} catch (error) {
 		return json({

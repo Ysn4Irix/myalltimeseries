@@ -26,7 +26,7 @@ export const GET = async () => {
 		return json({
 			status: 200,
 			error: true,
-			message: error.message
+			message: error instanceof Error ? error.message : 'Unknown error'
 		})
 	}
 }

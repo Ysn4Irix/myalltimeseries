@@ -1,7 +1,7 @@
 {
 	"name": "myalltimeseries",
 	"description": "A web application that lists my all watched tv shows",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"private": true,
 	"repository": {
 		"type": "git",

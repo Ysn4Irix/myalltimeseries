@@ -1,4 +1,4 @@
-FROM --platform=arm64 node:18-alpine
+FROM node:25-alpine
 ARG MONGO_URL=${MONGO_URL}
 ENV MONGO_URL=${MONGO_URL}
 WORKDIR /app

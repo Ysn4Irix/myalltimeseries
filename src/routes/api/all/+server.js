@@ -21,15 +21,12 @@ export const GET = async () => {
 			.toArray()
 
 		return json({
-			status: 200,
 			error: false,
 			data
 		})
 	} catch (error) {
-		return json({
-			status: 200,
-			error: true,
-			message: error.message
-		})
+		console.error(error)
+
+		return json({ error: true, message: 'Internal server error' }, { status: 500 })
 	}
 }

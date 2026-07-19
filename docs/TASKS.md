@@ -20,14 +20,14 @@
 | T04 | Completed | Change `MONGO_URL` from `$env/static/private` to `$env/dynamic/private`.             | T01        | Build works without build-time `MONGO_URL`                                  |
 | T05 | Completed | Add runtime validation for missing `MONGO_URL`.                                      | T04        | App fails clearly or reports safe error when missing                        |
 | T06 | Completed | Add runtime `ADMIN_API_TOKEN` access.                                                | T04        | Server-only `get_admin_api_token()` throws when `ADMIN_API_TOKEN` is absent |
-| T07 | Pending   | Replace `GET /api/add` with `POST /api/add`.                                         | T06        | `GET /api/add` no longer writes                                             |
-| T08 | Pending   | Require `Authorization: Bearer <ADMIN_API_TOKEN>` for `POST /api/add`.               | T07        | Missing/invalid token returns `401`                                         |
-| T09 | Pending   | Parse and validate JSON body for `name` and `poster`.                                | T07        | Invalid body returns `400`                                                  |
-| T10 | Pending   | Return `201` for successful series creation.                                         | T09        | Valid admin request creates record                                          |
-| T11 | Pending   | Remove or disable public `/api/seed`.                                                | T07        | `/api/seed` is unavailable or non-mutating                                  |
-| T12 | Pending   | Replace embedded JSON `status` fields with real HTTP status codes.                   | T07, T11   | API errors return correct HTTP status                                       |
-| T13 | Pending   | Stop returning raw internal error messages from API routes.                          | T12        | Server errors return generic `500` response                                 |
-| T14 | Pending   | Validate poster as a URL.                                                            | T09        | Invalid poster URL returns `400`                                            |
+| T07 | Completed | Replace `GET /api/add` with `POST /api/add`.                                         | T06        | `GET /api/add` no longer writes                                             |
+| T08 | Completed | Require `Authorization: Bearer <ADMIN_API_TOKEN>` for `POST /api/add`.               | T07        | Missing/invalid token returns `401`                                         |
+| T09 | Completed | Parse and validate JSON body for `name` and `poster`.                                | T07        | Invalid body returns `400`                                                  |
+| T10 | Completed | Return `201` for successful series creation.                                         | T09        | Valid admin request creates record                                          |
+| T11 | Completed | Remove or disable public `/api/seed`.                                                | T07        | `/api/seed` is unavailable or non-mutating                                  |
+| T12 | Completed | Replace embedded JSON `status` fields with real HTTP status codes.                   | T07, T11   | API errors return correct HTTP status                                       |
+| T13 | Completed | Stop returning raw internal error messages from API routes.                          | T12        | Server errors return generic `500` response                                 |
+| T14 | Completed | Validate poster as a URL.                                                            | T09        | Invalid poster URL returns `400`                                            |
 | T15 | Pending   | Create server-only data helper for listing series.                                   | T12        | Page and API use helper                                                     |
 | T16 | Pending   | Create server-only data helper for creating series.                                  | T15        | Admin API uses helper                                                       |
 | T17 | Pending   | Normalize series serialization, including stable `id`.                               | T15        | UI receives stable ids                                                      |

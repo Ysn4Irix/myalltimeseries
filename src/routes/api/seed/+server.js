@@ -1,5 +1,4 @@
 import { json } from '@sveltejs/kit'
-import { series } from '$db/series'
 
 /**
  *

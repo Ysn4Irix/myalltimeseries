@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit'
-import { series } from '$db/series'
+import { get_series } from '$db/series'
 /**
  *
  * @type {import('@sveltejs/kit').RequestHandler}
@@ -17,7 +17,7 @@ export const GET = async ({ url }) => {
 		})
 
 	try {
-		const response = await series.insertOne({
+		const response = await get_series().insertOne({
 			name,
 			poster
 		})

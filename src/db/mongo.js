@@ -1,11 +1,14 @@
 import { MongoClient } from 'mongodb'
-import { MONGO_URL } from '$env/static/private'
+import { get_mongo_url } from '$lib/server/env'
 
-const client = new MongoClient(MONGO_URL)
+/** @type {MongoClient | undefined} */
+let client
 
-export function start_mongo() {
-	console.log('Starting mongo...')
-	return client.connect()
+function get_client() {
+	client ??= new MongoClient(get_mongo_url())
+	return client
 }
 
-export default client.db()
+export function get_db() {
+	return get_client().db()
+}

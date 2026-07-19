@@ -1,3 +1,5 @@
-import db from '$db/mongo'
+import { get_db } from '$db/mongo'
 
-export const series = db.collection('series')
+export function get_series() {
+	return get_db().collection('series')
+}

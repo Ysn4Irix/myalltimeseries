@@ -3,6 +3,7 @@
 	"description": "A web application that lists my all watched tv shows",
 	"version": "1.0.2",
 	"private": true,
+	"packageManager": "bun@1.3.14",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/Ysn4Irix/myalltimeseries.git"

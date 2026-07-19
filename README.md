@@ -43,21 +43,24 @@ MyAllTimeSeries
 
 ### Development
 
-Once you've cloned the project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+This project uses [Bun 1.3.14](https://bun.sh/) and tracks `bun.lockb` for reproducible installs.
+
+Once you've cloned the project, install dependencies and start a development server:
 
 ```sh
-npm run dev
+bun install --frozen-lockfile
+bun run dev
 # or start and open the app in a new browser tab
-npm run dev -- --open
+bun run dev -- --open
 ```
 
 ### Production
 
 ```sh
-npm run build
+bun run build
 ```
 
-> You can preview the built client app with `npm run preview`,This should _not_ be used to serve your app in production.
+> You can preview the built client app with `bun run preview`. This should _not_ be used to serve your app in production.
 
 <br>
 

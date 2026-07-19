@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit'
-import { series } from '$db/series'
+import { get_series } from '$db/series'
 
 /**
  *
@@ -8,7 +8,7 @@ import { series } from '$db/series'
 
 export const GET = async () => {
 	try {
-		const data = await series
+		const data = await get_series()
 			.find(
 				{},
 				{

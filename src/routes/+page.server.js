@@ -1,8 +1,8 @@
-import { series } from '$db/series'
+import { get_series } from '$db/series'
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({}) => {
-	const data = await series
+	const data = await get_series()
 		.find(
 			{},
 			{

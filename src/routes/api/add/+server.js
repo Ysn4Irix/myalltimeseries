@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit'
-import { get_series } from '$db/series'
 import { get_admin_api_token } from '$lib/server/env'
+import { create_series } from '$lib/server/series'
 
 const MAX_NAME_LENGTH = 200
 const MAX_POSTER_LENGTH = 2048
@@ -77,12 +77,12 @@ export const POST = async ({ request }) => {
 	}
 
 	try {
-		const response = await get_series().insertOne({
+		const id = await create_series({
 			name,
 			poster
 		})
 
-		return json({ error: false, id: String(response.insertedId) }, { status: 201 })
+		return json({ error: false, id }, { status: 201 })
 	} catch (error) {
 		console.error(error)
 

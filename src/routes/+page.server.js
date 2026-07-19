@@ -1,20 +1,8 @@
-import { get_series } from '$db/series'
+import { list_series } from '$lib/server/series'
 
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({}) => {
-	const data = await get_series()
-		.find(
-			{},
-			{
-				projection: {
-					_id: 0
-				}
-			}
-		)
-		.sort({ _id: -1 })
-		.toArray()
-
 	return {
-		series: data
+		series: await list_series()
 	}
 }

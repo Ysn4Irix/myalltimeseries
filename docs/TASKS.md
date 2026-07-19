@@ -28,10 +28,10 @@
 | T12 | Completed | Replace embedded JSON `status` fields with real HTTP status codes.                   | T07, T11   | API errors return correct HTTP status                                       |
 | T13 | Completed | Stop returning raw internal error messages from API routes.                          | T12        | Server errors return generic `500` response                                 |
 | T14 | Completed | Validate poster as a URL.                                                            | T09        | Invalid poster URL returns `400`                                            |
-| T15 | Pending   | Create server-only data helper for listing series.                                   | T12        | Page and API use helper                                                     |
-| T16 | Pending   | Create server-only data helper for creating series.                                  | T15        | Admin API uses helper                                                       |
-| T17 | Pending   | Normalize series serialization, including stable `id`.                               | T15        | UI receives stable ids                                                      |
-| T18 | Pending   | Replace duplicated Mongo list queries in page/API routes.                            | T15        | No duplicate raw query logic                                                |
+| T15 | Completed | Create server-only data helper for listing series.                                   | T12        | Page and API use helper                                                     |
+| T16 | Completed | Create server-only data helper for creating series.                                  | T15        | Admin API uses helper                                                       |
+| T17 | Completed | Normalize series serialization, including stable `id`.                               | T15        | UI receives stable ids                                                      |
+| T18 | Completed | Replace duplicated Mongo list queries in page/API routes.                            | T15        | No duplicate raw query logic                                                |
 | T19 | Pending   | Add capped `limit` support for listing series.                                       | T15        | Large limits are rejected or capped                                         |
 | T20 | Pending   | Add cursor-based pagination using stable ordering.                                   | T19        | API returns bounded page and next cursor                                    |
 | T21 | Pending   | Update home page initial load to fetch only first page.                              | T20        | Initial payload is limited                                                  |

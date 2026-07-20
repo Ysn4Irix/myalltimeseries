@@ -38,7 +38,7 @@
 | T22 | Completed | Update “Load more” to fetch next page instead of slicing full collection.            | T21        | Infinite scroll loads additional records                                    |
 | T23 | Completed | Add accessible label for GitHub repository link.                                     | None       | Screen reader label exists                                                  |
 | T24 | Completed | Add accessible label and state semantics for theme toggle.                           | None       | Toggle has accessible name                                                  |
-| T25 | Completed | Add visible page heading on the home page.                                           | None       | Page has `<h1>`                                                             |
+| T25 | Deferred  | Visible home page heading intentionally removed by product decision.                 | None       | Product decision documented                                                 |
 | T26 | Completed | Use meaningful poster alt text.                                                      | None       | Card image alt uses series name                                             |
 | T27 | Completed | Add lazy/async image loading and stable aspect ratio.                                | None       | Images reduce initial load cost                                             |
 | T28 | Completed | Remove unused `data-sveltekit-noscroll` from list item.                              | None       | No dead attribute remains                                                   |
@@ -47,30 +47,30 @@
 | T31 | Completed | Add tests for admin API validation failures.                                         | T09, T29   | Invalid input tests pass                                                    |
 | T32 | Completed | Add tests for successful series creation helper/API behavior.                        | T16, T29   | Success test returns `201`                                                  |
 | T33 | Completed | Add tests for list helper pagination behavior.                                       | T20, T29   | Pagination tests pass                                                       |
-| T34 | Pending   | Add Bun CI workflow for install, lint, check, test, and build.                       | T29        | CI passes                                                                   |
-| T35 | Pending   | Document Dokploy install command: `bun install --frozen-lockfile`.                   | T01        | README/deployment docs updated                                              |
-| T36 | Pending   | Document Dokploy build command: `bun run build`.                                     | T35        | Docs updated                                                                |
-| T37 | Pending   | Document Dokploy start command: `bun ./build/index.js`.                              | T36        | Docs updated                                                                |
-| T38 | Pending   | Document Dokploy env vars: `MONGO_URL`, `ADMIN_API_TOKEN`, `NODE_ENV`, `PORT`.       | T04, T06   | Docs updated                                                                |
-| T39 | Pending   | Update README with Bun setup, Mongo setup, admin API, tests, and Dokploy deployment. | T35-T38    | README is complete                                                          |
-| T40 | Pending   | Fill design/API documentation with current app structure and behavior.               | T39        | Docs describe data flow and API                                             |
-| T41 | Pending   | Plan dependency upgrades in small groups after CI and tests are stable.              | T34        | Upgrade checklist exists                                                    |
-| T42 | Pending   | Upgrade dependencies incrementally, validating after each group.                     | T41        | `bun run lint && bun run check && bun run test && bun run build` passes     |
+| T34 | Completed | Add Bun CI workflow for install, lint, check, test, and build.                       | T29        | CI passes                                                                   |
+| T35 | Completed | Document Dokploy install command: `bun install --frozen-lockfile`.                   | T01        | README/deployment docs updated                                              |
+| T36 | Completed | Document Dokploy build command: `bun run build`.                                     | T35        | Docs updated                                                                |
+| T37 | Completed | Document Dokploy start command: `bun ./build/index.js`.                              | T36        | Docs updated                                                                |
+| T38 | Completed | Document Dokploy env vars: `MONGO_URL`, `ADMIN_API_TOKEN`, `NODE_ENV`, `PORT`.       | T04, T06   | Docs updated                                                                |
+| T39 | Completed | Update README with Bun setup, Mongo setup, admin API, tests, and Dokploy deployment. | T35-T38    | README is complete                                                          |
+| T40 | Completed | Fill design/API documentation with current app structure and behavior.               | T39        | Docs describe data flow and API                                             |
+| T41 | Completed | Plan dependency upgrades in small groups after CI and tests are stable.              | T34        | `docs/DEPENDENCY_UPGRADES.md` exists                                        |
+| T42 | Completed | Upgrade dependencies incrementally, validating after each group.                     | T41        | `bun install --frozen-lockfile`, lint, check, test, and build pass          |
 | T43 | Completed | Add reduced-motion handling for layout, card hover, and list item transitions.       | T23-T28    | Motion is disabled or avoided for users requesting reduced motion           |
 
 ## Recommended Execution Order
 
-| Phase           | Tasks        |
-| --------------- | ------------ |
-| Foundation      | T01-T06      |
-| Security        | T07-T14      |
-| Data layer      | T15-T18      |
-| Pagination      | T19-T22      |
-| Accessibility   | T23-T28, T43 |
-| Tests           | T29-T33      |
-| CI              | T34          |
-| Deployment/docs | T35-T40      |
-| Upgrades        | T41-T42      |
+| Phase           | Tasks                               |
+| --------------- | ----------------------------------- |
+| Foundation      | T01-T06                             |
+| Security        | T07-T14                             |
+| Data layer      | T15-T18                             |
+| Pagination      | T19-T22                             |
+| Accessibility   | T23-T24, T26-T28, T43; T25 deferred |
+| Tests           | T29-T33                             |
+| CI              | T34                                 |
+| Deployment/docs | T35-T40                             |
+| Upgrades        | T41-T42                             |
 
 ## Recommendations
 
@@ -149,11 +149,6 @@ Baseline verification:
 bun install --frozen-lockfile
 bun run lint
 bun run check
-bun run build
-```
-
-After Vitest is added:
-
-```sh
 bun run test
+bun run build
 ```

@@ -138,8 +138,6 @@
 </svelte:head>
 
 <main class="py-2">
-	<h1 class="px-10 pt-8 text-3xl font-bold sm:text-4xl">Series catalog</h1>
-
 	<ul
 		class="p-10 pt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"
 	>

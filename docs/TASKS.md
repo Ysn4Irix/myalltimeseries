@@ -32,16 +32,16 @@
 | T16 | Completed | Create server-only data helper for creating series.                                  | T15        | Admin API uses helper                                                       |
 | T17 | Completed | Normalize series serialization, including stable `id`.                               | T15        | UI receives stable ids                                                      |
 | T18 | Completed | Replace duplicated Mongo list queries in page/API routes.                            | T15        | No duplicate raw query logic                                                |
-| T19 | Pending   | Add capped `limit` support for listing series.                                       | T15        | Large limits are rejected or capped                                         |
-| T20 | Pending   | Add cursor-based pagination using stable ordering.                                   | T19        | API returns bounded page and next cursor                                    |
-| T21 | Pending   | Update home page initial load to fetch only first page.                              | T20        | Initial payload is limited                                                  |
-| T22 | Pending   | Update “Load more” to fetch next page instead of slicing full collection.            | T21        | Button loads additional records                                             |
+| T19 | Completed | Add capped `limit` support for listing series.                                       | T15        | Large limits are rejected or capped                                         |
+| T20 | Completed | Add cursor-based pagination using stable ordering.                                   | T19        | API returns bounded page and next cursor                                    |
+| T21 | Completed | Update home page initial load to fetch only first page.                              | T20        | Initial payload is limited                                                  |
+| T22 | Completed | Update “Load more” to fetch next page instead of slicing full collection.            | T21        | Infinite scroll loads additional records                                    |
 | T23 | Pending   | Add accessible label for GitHub repository link.                                     | None       | Screen reader label exists                                                  |
 | T24 | Pending   | Add accessible label and state semantics for theme toggle.                           | None       | Toggle has accessible name                                                  |
 | T25 | Pending   | Add visible page heading on the home page.                                           | None       | Page has `<h1>`                                                             |
 | T26 | Pending   | Use meaningful poster alt text.                                                      | None       | Card image alt uses series name                                             |
 | T27 | Pending   | Add lazy/async image loading and stable aspect ratio.                                | None       | Images reduce initial load cost                                             |
-| T28 | Pending   | Remove unused `data-sveltekit-noscroll` from list item.                              | None       | No dead attribute remains                                                   |
+| T28 | Completed | Remove unused `data-sveltekit-noscroll` from list item.                              | None       | No dead attribute remains                                                   |
 | T29 | Pending   | Add Vitest dependency and test script.                                               | T01        | `bun run test` runs                                                         |
 | T30 | Pending   | Add tests for admin API auth failures.                                               | T08, T29   | Missing/invalid token tests pass                                            |
 | T31 | Pending   | Add tests for admin API validation failures.                                         | T09, T29   | Invalid input tests pass                                                    |

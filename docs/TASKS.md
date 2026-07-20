@@ -42,11 +42,11 @@
 | T26 | Completed | Use meaningful poster alt text.                                                      | None       | Card image alt uses series name                                             |
 | T27 | Completed | Add lazy/async image loading and stable aspect ratio.                                | None       | Images reduce initial load cost                                             |
 | T28 | Completed | Remove unused `data-sveltekit-noscroll` from list item.                              | None       | No dead attribute remains                                                   |
-| T29 | Pending   | Add Vitest dependency and test script.                                               | T01        | `bun run test` runs                                                         |
-| T30 | Pending   | Add tests for admin API auth failures.                                               | T08, T29   | Missing/invalid token tests pass                                            |
-| T31 | Pending   | Add tests for admin API validation failures.                                         | T09, T29   | Invalid input tests pass                                                    |
-| T32 | Pending   | Add tests for successful series creation helper/API behavior.                        | T16, T29   | Success test returns `201`                                                  |
-| T33 | Pending   | Add tests for list helper pagination behavior.                                       | T20, T29   | Pagination tests pass                                                       |
+| T29 | Completed | Add Vitest dependency and test script.                                               | T01        | `bun run test` runs                                                         |
+| T30 | Completed | Add tests for admin API auth failures.                                               | T08, T29   | Missing/invalid token tests pass                                            |
+| T31 | Completed | Add tests for admin API validation failures.                                         | T09, T29   | Invalid input tests pass                                                    |
+| T32 | Completed | Add tests for successful series creation helper/API behavior.                        | T16, T29   | Success test returns `201`                                                  |
+| T33 | Completed | Add tests for list helper pagination behavior.                                       | T20, T29   | Pagination tests pass                                                       |
 | T34 | Pending   | Add Bun CI workflow for install, lint, check, test, and build.                       | T29        | CI passes                                                                   |
 | T35 | Pending   | Document Dokploy install command: `bun install --frozen-lockfile`.                   | T01        | README/deployment docs updated                                              |
 | T36 | Pending   | Document Dokploy build command: `bun run build`.                                     | T35        | Docs updated                                                                |

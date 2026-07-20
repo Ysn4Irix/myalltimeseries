@@ -18,12 +18,16 @@
 	let has_more = data.has_more
 	let loading = false
 	let error = ''
+	let reduce_motion = false
 	/** @type {HTMLElement | undefined} */
 	let sentinel
 	/** @type {IntersectionObserver | undefined} */
 	let observer
 	/** @type {AbortController | undefined} */
 	let abort_controller
+
+	$: fly_in = reduce_motion ? { y: 0, duration: 0, delay: 0 } : { y: 50, duration: 500, delay: 500 }
+	$: fly_out = reduce_motion ? { duration: 0 } : { duration: 500 }
 
 	/**
 	 * @param {unknown} value
@@ -85,22 +89,39 @@
 	}
 
 	onMount(() => {
-		if (!sentinel || !has_more) {
-			return
+		const reduced_motion_query = window.matchMedia('(prefers-reduced-motion: reduce)')
+		const update_reduce_motion = () => {
+			reduce_motion = reduced_motion_query.matches
 		}
 
-		observer = new IntersectionObserver(
-			(entries) => {
-				if (entries.some((entry) => entry.isIntersecting)) {
-					load_more()
-				}
-			},
-			{ rootMargin: '200px 0px' }
-		)
+		update_reduce_motion()
 
-		observer.observe(sentinel)
+		if (reduced_motion_query.addEventListener) {
+			reduced_motion_query.addEventListener('change', update_reduce_motion)
+		} else {
+			reduced_motion_query.addListener(update_reduce_motion)
+		}
+
+		if (sentinel && has_more) {
+			observer = new IntersectionObserver(
+				(entries) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						load_more()
+					}
+				},
+				{ rootMargin: '200px 0px' }
+			)
+
+			observer.observe(sentinel)
+		}
 
 		return () => {
+			if (reduced_motion_query.removeEventListener) {
+				reduced_motion_query.removeEventListener('change', update_reduce_motion)
+			} else {
+				reduced_motion_query.removeListener(update_reduce_motion)
+			}
+
 			if (observer) {
 				observer.disconnect()
 			}
@@ -117,17 +138,21 @@
 </svelte:head>
 
 <main class="py-2">
+	<h1 class="px-10 pt-8 text-3xl font-bold sm:text-4xl">Series catalog</h1>
+
 	<ul
-		class="p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"
+		class="p-10 pt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"
 	>
 		{#each series as { name, poster, id } (id)}
-			<li in:fly={{ y: 50, duration: 500, delay: 500 }} out:fly={{ duration: 500 }} {id}>
+			<li in:fly={fly_in} out:fly={fly_out} {id}>
 				<Card {name} {poster} />
 			</li>
 		{/each}
 	</ul>
 
-	<div bind:this={sentinel} class="h-1" aria-hidden="true" />
+	<div bind:this={sentinel} class="h-1" aria-hidden="true">
+		<!-- infinite scroll sentinel -->
+	</div>
 
 	{#if loading}
 		<p class="pb-10 text-center text-sm opacity-70" role="status" aria-live="polite">

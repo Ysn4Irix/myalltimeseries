@@ -36,11 +36,11 @@
 | T20 | Completed | Add cursor-based pagination using stable ordering.                                   | T19        | API returns bounded page and next cursor                                    |
 | T21 | Completed | Update home page initial load to fetch only first page.                              | T20        | Initial payload is limited                                                  |
 | T22 | Completed | Update “Load more” to fetch next page instead of slicing full collection.            | T21        | Infinite scroll loads additional records                                    |
-| T23 | Pending   | Add accessible label for GitHub repository link.                                     | None       | Screen reader label exists                                                  |
-| T24 | Pending   | Add accessible label and state semantics for theme toggle.                           | None       | Toggle has accessible name                                                  |
-| T25 | Pending   | Add visible page heading on the home page.                                           | None       | Page has `<h1>`                                                             |
-| T26 | Pending   | Use meaningful poster alt text.                                                      | None       | Card image alt uses series name                                             |
-| T27 | Pending   | Add lazy/async image loading and stable aspect ratio.                                | None       | Images reduce initial load cost                                             |
+| T23 | Completed | Add accessible label for GitHub repository link.                                     | None       | Screen reader label exists                                                  |
+| T24 | Completed | Add accessible label and state semantics for theme toggle.                           | None       | Toggle has accessible name                                                  |
+| T25 | Completed | Add visible page heading on the home page.                                           | None       | Page has `<h1>`                                                             |
+| T26 | Completed | Use meaningful poster alt text.                                                      | None       | Card image alt uses series name                                             |
+| T27 | Completed | Add lazy/async image loading and stable aspect ratio.                                | None       | Images reduce initial load cost                                             |
 | T28 | Completed | Remove unused `data-sveltekit-noscroll` from list item.                              | None       | No dead attribute remains                                                   |
 | T29 | Pending   | Add Vitest dependency and test script.                                               | T01        | `bun run test` runs                                                         |
 | T30 | Pending   | Add tests for admin API auth failures.                                               | T08, T29   | Missing/invalid token tests pass                                            |
@@ -56,20 +56,21 @@
 | T40 | Pending   | Fill design/API documentation with current app structure and behavior.               | T39        | Docs describe data flow and API                                             |
 | T41 | Pending   | Plan dependency upgrades in small groups after CI and tests are stable.              | T34        | Upgrade checklist exists                                                    |
 | T42 | Pending   | Upgrade dependencies incrementally, validating after each group.                     | T41        | `bun run lint && bun run check && bun run test && bun run build` passes     |
+| T43 | Completed | Add reduced-motion handling for layout, card hover, and list item transitions.       | T23-T28    | Motion is disabled or avoided for users requesting reduced motion           |
 
 ## Recommended Execution Order
 
-| Phase           | Tasks   |
-| --------------- | ------- |
-| Foundation      | T01-T06 |
-| Security        | T07-T14 |
-| Data layer      | T15-T18 |
-| Pagination      | T19-T22 |
-| Accessibility   | T23-T28 |
-| Tests           | T29-T33 |
-| CI              | T34     |
-| Deployment/docs | T35-T40 |
-| Upgrades        | T41-T42 |
+| Phase           | Tasks        |
+| --------------- | ------------ |
+| Foundation      | T01-T06      |
+| Security        | T07-T14      |
+| Data layer      | T15-T18      |
+| Pagination      | T19-T22      |
+| Accessibility   | T23-T28, T43 |
+| Tests           | T29-T33      |
+| CI              | T34          |
+| Deployment/docs | T35-T40      |
+| Upgrades        | T41-T42      |
 
 ## Recommendations
 

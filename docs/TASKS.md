@@ -2,13 +2,13 @@
 
 ## Decisions
 
-| Topic           | Decision                                                                |
-| --------------- | ----------------------------------------------------------------------- |
-| Package manager | Use Bun 1.3.14 and make Bun the only documented package manager.        |
-| Deployment      | Use Dokploy's Node/Bun build flow. Do not use a custom Dockerfile path. |
-| Admin auth      | Use simple bearer-token auth with `ADMIN_API_TOKEN`.                    |
-| Tests           | Use Vitest only for now.                                                |
-| Runtime env     | Move `MONGO_URL` to runtime env handling with `$env/dynamic/private`.   |
+| Topic           | Decision                                                              |
+| --------------- | --------------------------------------------------------------------- |
+| Package manager | Use Bun 1.3.14 and make Bun the only documented package manager.      |
+| Deployment      | Use Dokploy's Dockerfile deployment flow with `./Dockerfile`.         |
+| Admin auth      | Use simple bearer-token auth with `ADMIN_API_TOKEN`.                  |
+| Tests           | Use Vitest only for now.                                              |
+| Runtime env     | Move `MONGO_URL` to runtime env handling with `$env/dynamic/private`. |
 
 ## Task Backlog
 
@@ -48,10 +48,10 @@
 | T32 | Completed | Add tests for successful series creation helper/API behavior.                        | T16, T29   | Success test returns `201`                                                  |
 | T33 | Completed | Add tests for list helper pagination behavior.                                       | T20, T29   | Pagination tests pass                                                       |
 | T34 | Completed | Add Bun CI workflow for install, lint, check, test, and build.                       | T29        | CI passes                                                                   |
-| T35 | Completed | Document Dokploy install command: `bun install --frozen-lockfile`.                   | T01        | README/deployment docs updated                                              |
-| T36 | Completed | Document Dokploy build command: `bun run build`.                                     | T35        | Docs updated                                                                |
-| T37 | Completed | Document Dokploy start command: `bun ./build/index.js`.                              | T36        | Docs updated                                                                |
-| T38 | Completed | Document Dokploy env vars: `MONGO_URL`, `ADMIN_API_TOKEN`, `NODE_ENV`, `PORT`.       | T04, T06   | Docs updated                                                                |
+| T35 | Completed | Document Dokploy Dockerfile settings: path, context, port, and no custom start.      | T01        | README/deployment docs updated                                              |
+| T36 | Completed | Document Dokploy health check path `/healthz` and expected `{ ok: true }` response.  | T35        | Docs updated                                                                |
+| T37 | Completed | Document Dokploy runtime env vars, including `HOST`, `PORT`, and `ORIGIN`.           | T36        | Docs updated                                                                |
+| T38 | Completed | Document Dokploy-managed Mongo connection requirements for `MONGO_URL`.              | T04, T06   | Docs updated                                                                |
 | T39 | Completed | Update README with Bun setup, Mongo setup, admin API, tests, and Dokploy deployment. | T35-T38    | README is complete                                                          |
 | T40 | Completed | Fill design/API documentation with current app structure and behavior.               | T39        | Docs describe data flow and API                                             |
 | T41 | Completed | Plan dependency upgrades in small groups after CI and tests are stable.              | T34        | `docs/DEPENDENCY_UPGRADES.md` exists                                        |
@@ -118,28 +118,23 @@ Required runtime variables:
 MONGO_URL=...
 ADMIN_API_TOKEN=...
 NODE_ENV=production
+HOST=0.0.0.0
 PORT=3000
+ORIGIN=https://series.ysnirix.xyz
 ```
 
-## Dokploy Commands
+## Dokploy Dockerfile Deployment
 
-Install command:
+| Setting              | Value           |
+| -------------------- | --------------- |
+| Deployment type      | Dockerfile      |
+| Dockerfile path      | `./Dockerfile`  |
+| Build context        | Repository root |
+| Container port       | `3000`          |
+| Health check path    | `/healthz`      |
+| Expected health body | `{ ok: true }`  |
 
-```sh
-bun install --frozen-lockfile
-```
-
-Build command:
-
-```sh
-bun run build
-```
-
-Start command:
-
-```sh
-bun ./build/index.js
-```
+No custom start command is needed. Set secrets and runtime values in the Dokploy UI only. For Dokploy-managed MongoDB, use the container-reachable connection string, include the database name in `MONGO_URL`, and do not use `127.0.0.1` for a separate Mongo service.
 
 ## Verification Commands
 

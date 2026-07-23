@@ -62,12 +62,14 @@ PORT=3000
 
 Runtime variables:
 
-| Name              | Purpose                                              |
-| ----------------- | ---------------------------------------------------- |
-| `MONGO_URL`       | Server-only MongoDB connection string.               |
-| `ADMIN_API_TOKEN` | Server-only bearer token for admin writes.           |
-| `NODE_ENV`        | Runtime mode, usually `development` or `production`. |
-| `PORT`            | Port used by the adapter-node production server.     |
+| Name              | Purpose                                                                 |
+| ----------------- | ----------------------------------------------------------------------- |
+| `MONGO_URL`       | Server-only MongoDB connection string, including the database name.     |
+| `ADMIN_API_TOKEN` | Server-only bearer token for admin writes.                              |
+| `NODE_ENV`        | Runtime mode, usually `development` or `production`.                    |
+| `HOST`            | Host interface used by the production server. Use `0.0.0.0` in Dokploy. |
+| `PORT`            | Port used by the adapter-node production server.                        |
+| `ORIGIN`          | Public deployment origin for SvelteKit.                                 |
 
 ### Development
 
@@ -97,15 +99,35 @@ bun run build
 
 > You can preview the built client app with `bun run preview`. This should _not_ be used to serve your app in production.
 
-### Dokploy Node/Bun Deployment
+### Dokploy Dockerfile Deployment
 
-Set the runtime variables above in Dokploy, then use these commands:
+Use Dokploy's Dockerfile deployment flow. No custom start command is needed because the image defines its own startup behavior.
 
-| Step    | Command                         |
-| ------- | ------------------------------- |
-| Install | `bun install --frozen-lockfile` |
-| Build   | `bun run build`                 |
-| Start   | `bun ./build/index.js`          |
+Dokploy application settings:
+
+| Setting              | Value           |
+| -------------------- | --------------- |
+| Deployment type      | Dockerfile      |
+| Dockerfile path      | `./Dockerfile`  |
+| Build context        | Repository root |
+| Container port       | `3000`          |
+| Health check path    | `/healthz`      |
+| Expected health body | `{ ok: true }`  |
+
+Set runtime environment variables in the Dokploy UI only. Do not commit deployment secrets or real connection strings.
+
+```sh
+MONGO_URL=<dokploy-managed-mongo-connection-string-with-db-name>
+ADMIN_API_TOKEN=<strong-secret>
+NODE_ENV=production
+HOST=0.0.0.0
+PORT=3000
+ORIGIN=https://series.ysnirix.xyz
+```
+
+For Dokploy-managed MongoDB, use the connection string that is reachable from the app container and include the database name in `MONGO_URL`, for example the equivalent of `/myalltimeseries` at the end of the URI. Do not use `127.0.0.1` for a separate Mongo service from inside the app container.
+
+Keep `.env.example` available in the Docker build context as a safe template only; production values belong in Dokploy environment settings.
 
 ### API
 
